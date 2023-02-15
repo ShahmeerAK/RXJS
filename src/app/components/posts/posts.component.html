@@ -1,0 +1,29 @@
+
+<h1>POSTS</h1>
+<div class="navbar">
+    <input type="text" class="form-control" 
+    name="title" 
+    [(ngModel)]="title"
+    (ngModelChange)="search()"
+    placeholder="Enter Title">
+
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th (click)="sort('userId')">User Id<button>Sort</button></th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let post of posts | orderBy:key:reverse | paginate:{itemsPerPage:5, currentPage:p};">
+            <td>{{post.userId}}</td>
+            <td>{{post.id}}</td>
+            <td>{{post.title}}</td>
+            <td>{{post.body}}</td>
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</table>
