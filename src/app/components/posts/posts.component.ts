@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Posts } from '../../_models/posts';
-import { Observable,from, materialize,of,combineLatest} from 'rxjs';
-import { filter,startWith,map,combineLatestWith } from 'rxjs/operators';
+import { Observable,  from,  materialize,  of,  combineLatest,  pipe,  throwError,} from 'rxjs';
+import {filter,  startWith,  map, combineLatestWith,  catchError,  tap, debounceTime,distinctUntilChanged,} from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -11,32 +12,45 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
-
+  @Output() searchEvent = new EventEmitter<string>();
+  @Input() search: () => {};
   //METHOD 1
-  posts: Posts[]=[];
+  posts$: Observable<Posts[]>;
   title: any;
   p: number = 1;
-  constructor(private api: ApiService) {}
+
+  public errorMessage: string = null;
+  constructor(private api: ApiService) { }
   ngOnInit(): void {
     this.getPosts();
   }
+
   getPosts() {
-    this.api.getPosts().subscribe((res) => {
-      this.posts = res;
-      //this.posts$ = this.api.getPosts();
-    })
+    // this.api.getPosts().subscribe((res) => {
+    //     this.posts = res;},
+    this.posts$ = this.api.getPosts().pipe(
+      tap({
+        error: (error) => {
+          this.errorMessage = error.message;
+        },
+      })
+    );
   }
 
-  search() {
+  search2() {
     if (this.title === '') {
       this.ngOnInit();
     } else {
-      this.posts = this.posts.filter((res) => {
-          return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
+      this.posts$ = this.posts$.pipe(
+        filter((res: any) => {
+          return res.title
+            .toLocaleLowerCase()
+            .match(this.title.toLocaleLowerCase());
         })
-      ;
+      );
     }
   }
+
   key: string = 'id';
   reverse: boolean = false;
 
@@ -46,13 +60,12 @@ export class PostsComponent implements OnInit {
   }
 }
 
-  
 // METHOD2
-    
 
 //  posts: Observable<Posts[]>
 //  searchResult: Observable<any>;
 //  searchQuery$: Observable<any>;
+// p:number=1;
 //  title: FormControl;
 //  constructor(private service: ApiService) {
 //    this.posts = this.service.getPosts();
@@ -61,11 +74,11 @@ export class PostsComponent implements OnInit {
 //    this.search();
 //  }
 //   search(){
-//  this.searchResult= this.searchQuery$.pipe(combineLatestWith(this.posts)
-//    ,map(([query, searchList]) => {
+//  this.searchResult= this.searchQuery$.combineLatest(this.posts)
+//    .map(([query, searchList]) => {
 //      return searchList.filter(state => state.title
 //      .toLowerCase().indexOf(query.toLowerCase()) !== -1)
-//    }))
+//    })
 //  }
 // ngOnInit(): void {
 //   //this.search();

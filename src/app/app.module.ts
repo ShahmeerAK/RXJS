@@ -11,10 +11,16 @@ import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { SearchComponent } from './components/search/search.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    SearchComponent,
+    ErrorMessageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
