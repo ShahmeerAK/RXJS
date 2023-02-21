@@ -12,14 +12,14 @@ export class ApiService {
   constructor(private http: HttpClient) {}
   getPosts():Observable<Posts[]> {
     return this.http.get<Posts[]>(this.baseUrl)
-  // .pipe(
-  //       tap(() => {
-  //         if (HttpErrorResponse instanceof ErrorEvent) {
-  //           //client side error
-  //           throw new TypeError(`Value`);
-  //         }
-  //       })
-  //     );
+  .pipe(
+        tap(() => {
+          if (HttpErrorResponse instanceof ErrorEvent) {
+            //client side error
+            throw new TypeError(`Value`);
+          }
+        })
+      );
   }
   // public handleError(error: HttpErrorResponse) {
   //   let errorMessage = '';

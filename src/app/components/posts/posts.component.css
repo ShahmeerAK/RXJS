@@ -2,23 +2,15 @@
 .usId{
     display: flex;
 }
-.id{
-    display: flex;
-}
-.title{
-    display: flex;
-}
-.body{
-    display: flex;
-}
 .form-control{
     width: 50%;
 }
 .upAr{
-    font-size:1.5rem;
+    font-size: 1.5em;
     cursor: pointer;
     margin-top: -8px;
     margin-left: 8px;
+    margin-right: 8px;
 }
 .upAr:hover{
     color:rgb(166, 225, 245);
