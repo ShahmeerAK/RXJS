@@ -1,5 +1,34 @@
-<app-navbar></app-navbar>
-<h3 class="container">SEARCH DATA BY TITLE</h3>
+<nav class="navbar navbar-expand-lg mx-8 navbar-light navbarr">
+  <a class="navbar-brand nava ">
+    <img src="assets/favicon.ico" alt="Angular Icon">NGULAR RXJS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+      <form class="container">
+        <input type="text" class="form-control" name="title" [(ngModel)]="title" (ngModelChange)="search2()"
+        autocomplete="off" placeholder="Search by Title" />
+      </form>
+    </div>
+  </nav>
+
+  
+
+<!-- <h3 class="container">SEARCH DATA BY TITLE</h3>
 <form class="container">
   
     <input
@@ -11,7 +40,7 @@
     autocomplete="off"
     placeholder="Enter Title"
   />
-</form>
+</form> -->
 
   <div class="container mt-2" *ngIf="errorMessage" >
     <div class="row">
@@ -22,7 +51,7 @@
   </div>
   <div class="table-responsive-xm mt-2">
 <table class="container table table-bordered" *ngIf="!errorMessage">
-  <thead class="table-dark">
+  <thead>
     <tr class="text-center">
       <th class="usId">UserID <span class="upAr" (click)="sort('userId')">&varr;</span></th>
       <th>ID</th>

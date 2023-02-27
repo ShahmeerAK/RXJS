@@ -1,10 +1,16 @@
-
+.navbarr{
+    background: #e9edf1e0;
+    border-bottom: 1px solid black;
+}
 .usId{
     display: flex;
 }
+.nava{
+    margin-left:8rem;
+}
 .form-control{
     width: 50%;
-}
+ }
 .upAr{
     font-size: 1.5em;
     cursor: pointer;
@@ -13,14 +19,16 @@
     margin-right: 8px;
 }
 .upAr:hover{
-    color:rgb(166, 225, 245);
+    color:rgb(136, 202, 255);
+}
+thead{
+    background-color: #e9edf1e0;;
 }
 tr{
     border-radius: 4%;
 }
-tr:hover{
-    background-color: rgb(97, 93, 93);
-    color: white;
+td:hover{
+    background-color: rgb(208, 225, 252);
 }
 .pagination{
     font-size: 20px;
